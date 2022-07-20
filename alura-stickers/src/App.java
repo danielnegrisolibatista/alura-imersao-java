@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 public class App {
     public static void main(String[] args) throws Exception {
-
       // fazer uma conexão HTTP e buscar os top 250 filmes
-      String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java/api/TopMovies.json";
+      String url = Api.getTop250Movies();
+      //String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java/api/TopMovies.json";
 
       URI address = URI.create(url);
       var client = HttpClient.newHttpClient();
@@ -23,10 +23,13 @@ public class App {
 
       // exibir e manipular os dados 
       for (Map<String,String> movie : moviesList) {
-        System.out.println(movie.get("title"));
-        System.out.println(movie.get("image"));
-        System.out.println(movie.get("imDbRating"));
-        System.out.println();
+          System.out.println("Título: " + movie.get("title"));
+          System.out.println("Poster: " + movie.get("image"));
+          System.out.println("\u001b[46mClassificação: " + movie.get("imDbRating")+"\u001b[m");
+
+          Integer imDbRating = (Math.round(Float.parseFloat(movie.get("imDbRating"))));
+          System.out.println("Avaliação: " + "*".repeat(imDbRating));
+          System.out.println();
       }
-    } 
+    }
 }
