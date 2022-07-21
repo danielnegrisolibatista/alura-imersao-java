@@ -7,4 +7,10 @@ public final class ReadProperties {
     props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties"));
     return props;
   }
+
+  public static String getProperty(String key) throws IOException {
+    Properties props = new Properties();
+    props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties"));
+    return props.getProperty(key);
+  }
 }
